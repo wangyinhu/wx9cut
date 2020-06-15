@@ -7,6 +7,12 @@ if(len(sys.argv) != 2):
 
 inFileName = sys.argv[1]
 
+outDirName = inFileName.split('.')[0]
+fileType = inFileName.split('.')[1].lower()
+
+if fileType not in ("jpg", "png"):
+    exit("unknow file type")
+
 im = Image.open(inFileName)
 
 if(im.size[0] != im.size[1]):
@@ -29,10 +35,9 @@ boxes = ((0, 0, l, l),
          (2*(l+g), 2*(l+g), L, L),
          )
 
-outDirName = inFileName.split('.')[0]
 os.makedirs(outDirName,exist_ok=True)
-for index, box in enumerate(boxes):
+for index, box in enumerate(iterable=boxes, start=1):
     out = region.crop(box)
-    out.save(outDirName + "/" + str(index) + ".jpg")
+    out.save(outDirName + "/" + str(index) + "." + fileType)
 
 print("Done!")
