@@ -7,8 +7,8 @@ if(len(sys.argv) != 2):
 
 inFileName = sys.argv[1]
 
-outDirName = inFileName.split('.')[0]
-fileType = inFileName.split('.')[1].lower()
+outDirName = inFileName.split('.')[-2]
+fileType = inFileName.split('.')[-1].lower()
 
 if fileType not in ("jpg", "png"):
     exit("unknow file type")
